@@ -1,0 +1,125 @@
+.footer {
+    background-color: var(--dark-blue);
+}
+
+.sbFooter {
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionPadding {
+    padding: 4rem 4rem;
+}
+
+.sbFooterLinks {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.sbFooterLinksDiv {
+    width: 150px;
+    margin: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    color: white;
+}
+
+.sbFooterLinksDiv h4 {
+    color: #fff;
+}
+
+.sbFooterLinksDiv a p {
+    color: rgb(175, 175, 179);
+    text-decoration: none;
+}
+
+.socialMedia {
+    display: flex;
+    flex-direction: row;
+}
+
+.sbFooterLinksDiv p {
+    color: #fff;
+    margin: 0.5rem 0;
+    cursor: pointer;
+}
+
+.sbFooterBelow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 0.2rem;
+}
+
+.sbFooterBelowLinks {
+    display: flex;
+    flex-direction: row;
+}
+
+.sbFooterBelowLinks p {
+    margin-left: 2rem;
+    color: white;
+    font-weight: 600;
+    line-height: 25px;
+}
+
+hr {
+    color: white;
+    width: 100%;
+}
+
+.sbFooterCopyright p {
+    color: white;
+    line-height: 25px;
+}
+
+@media screen and (max-width: 850px) {
+    .sbFooterHeading h4 {
+        font-size: 44px;
+        line-height: 50px;
+    }
+}
+
+@media screen and (max-width:550px) {
+    .sbFooterHeading h1 {
+        font-size: 34px;
+        line-height: 42px;
+    }
+
+    .sbFooterlinks div {
+        margin: 1rem 0;
+    }
+
+    .sbFooterBelow p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .sbFooterBelow {
+        flex-direction: column;
+        justify-content: left;
+    }
+
+    .sbFooterBelowLinks {
+        flex-direction: column;
+    }
+
+    .sbFooterBelowLinks p {
+        margin-left: 0rem;
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .sbFooterHeading h1 {
+        font-size: 27px;
+        line-height: 38px;
+    }
+}
