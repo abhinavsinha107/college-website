@@ -70,7 +70,7 @@ const Footer = () => {
             </a>
           </div>
           <div className={styles.sbFooterLinksDiv}>
-            <h4>Coming Soon On</h4>
+            <h4>Socials</h4>
             <div className={styles.socialMedia}>
               <p>
                 <FaFacebook size={20} />
