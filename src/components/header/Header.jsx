@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../../firebase/config';
 import { toast } from 'react-toastify';
+import {useDispatch} from "react-redux";
+import {REMOVE_ACTIVE_USER, SET_ACTIVE_USER} from "../../redux/slice/authSlice";
+import ShowOnLogin, { ShowOnLogout } from '../hiddenLink/hiddenLink';
 
 const logo = (
   <div className={styles.logo}>
@@ -22,6 +25,7 @@ const Header = () => {
   const [displayName, setDisplayName] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -46,12 +50,27 @@ const Header = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setDisplayName(user.displayName);
+        // console.log(user);
+        if(user.displayName == null) {
+          const u1 = user.email.substring(0, user.email.indexOf('@'));
+          const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+          setDisplayName(uName);
+        } else {
+          setDisplayName(user.displayName);
+        }
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            userName: user.displayName ? user.displayName : displayName,
+            userID: user.uid,
+          })
+        );
       } else {
         setDisplayName("");
+        dispatch(REMOVE_ACTIVE_USER())
       }
     });
-  }, []);
+  }, [dispatch, displayName]);
 
   return (
     <header>
@@ -84,19 +103,22 @@ const Header = () => {
           </ul>
           <div className={styles.headerRight} onClick={hideMenu}>
             <span className={styles.links}>
-              <NavLink to="/login" className={activeLink}>
-                Login
-              </NavLink>
-              <a href="#">
-                <FaUserCircle size={16}/>
-                Hi, {displayName}
-              </a>
-              <NavLink to="/register" className={activeLink}>
-                Register
-              </NavLink>
-              <NavLink to="/" onClick={logoutUser}>
-                Logout
-              </NavLink>
+              <ShowOnLogout>
+                <NavLink to="/login" className={activeLink}>
+                  Login
+                </NavLink>
+              </ShowOnLogout>
+              <ShowOnLogin>
+                <a href="#" style={{color: "#ff7722"}}>
+                  <FaUserCircle size={16} />
+                  Hi, {displayName}
+                </a>
+              </ShowOnLogin>
+              <ShowOnLogin>
+                <NavLink to="/" onClick={logoutUser}>
+                  Logout
+                </NavLink>
+              </ShowOnLogin>
             </span>
           </div>
         </nav>
